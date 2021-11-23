@@ -25,7 +25,7 @@
                         </form>
                         <form action="#" method="GET" class="w-full max-w-sm">
                         </form>
-                        <form action="courses/index" method="GET" class="w-full max-w-sm">
+                        <form action="products/add" method="GET" class="w-full max-w-sm">
                             @csrf
                             <button type="submit" class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-3 px-5 rounded">
                               Add Product
