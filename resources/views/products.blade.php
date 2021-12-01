@@ -3,6 +3,8 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('All Products') }}
         </h2>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" >
+        </script>
     </x-slot>
 
         <div class="py-12">
@@ -25,13 +27,27 @@
                         </form>
                         <form action="#" method="GET" class="w-full max-w-sm">
                         </form>
-                        <form action="products/add" method="GET" class="w-full max-w-sm">
+                        <form action="{{ route('addProduct') }}" method="get" class="w-full max-w-sm">
                             @csrf
-                            <button type="submit" class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-3 px-5 rounded">
-                              Add Product
+                            <button type="submit"  class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-3 px-5 rounded">
+                            Add Product
                             </button>
+
+
                         </form>
                     </div>
+
+
+                    @if(Session()->has('success'))
+                    <script>
+                        swal("success","{{Session()->get('success')}}","success");
+                        </script>
+                 @endif
+                {{-- @if(Session::get('fail'))
+                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                        <p>{{Session::get('fail')}}</p>
+                    </div>
+                 @endif --}}
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -45,6 +61,9 @@
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Description
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Quantity
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Status
@@ -61,44 +80,46 @@
                                         </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach ($list as $item )
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-                                                </div>
+
                                                 <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{-- Call Product from Database --}}
-                                                    Product Name
+                                                    {{ $item->name }}
                                                 </div>
-                                                <div class="text-sm text-gray-500">
-                                                    Category
-                                                </div>
+
                                                 </div>
                                             </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">Description</div>
-                                            <div class="text-sm text-gray-500">Summery</div>
+                                            <div class="text-sm text-gray-900">   {{ $item->description }}</div>
+
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $item->quantity }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-bold rounded bg-green-100 text-green-800">
-                                                Active
+                                            {{ $item->status }}
                                             </span>
                                             </td>
+
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            2000/-
+                                            {{ $item->price }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 sm:flex items-center">
-                                                <form action="products/edit" method="GET" class="w-full max-w-sm">
+                                                <form action="{{ route('editProduct',['id' => "$item->id" ]) }}"  method="GET" class="w-full max-w-sm">
                                                     @csrf
                                                     <button type="submit" class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-2 px-4 rounded">
                                                         Edit
                                                     </button>
                                                 </form>
-                                                
-                                                <form action="products/delete" method="GET" class="w-full max-w-sm">
+
+                                                <form action="{{route('deleteProduct',['id'=>"$item->id" ])}}" method="GET"  class="w-full max-w-sm">
+
                                                     @csrf
                                                     <button type="submit" class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-2 px-4 rounded">
                                                         Delete
@@ -106,20 +127,21 @@
                                                 </form>
                                             {{-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a> --}}
                                             </td>
-                                            
+
                                         </tr>
-                            
+
                                         <!-- More people... -->
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-  
+
                 </div>
             </div>
         </div>
 
-    
+
 </x-app-layout>
