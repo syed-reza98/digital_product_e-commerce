@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Model\Product;
+use App\Models\Product;
+use App\Models\Cat;
 
 class ProductController extends Controller
 {
@@ -17,6 +18,7 @@ class ProductController extends Controller
             'ProductName'=>'required',
             'Quantity'=>'required',
             'Price'=>'required',
+            'Category'=>'required',
 
         ]);
 
@@ -25,6 +27,7 @@ class ProductController extends Controller
          'description'=>$req->input('Description'),
          'quantity'=>$req->input('Quantity'),
          'price'=>$req->input('Price'),
+         'cat_id'=>$req->input('Category'),
 
        ]);
 
@@ -40,8 +43,11 @@ class ProductController extends Controller
 
     public function fetchProductfromdb()
     {
-      
-             $data=DB::table('Products')->where('status','Active')->get();
+             $data = Product::where('status','Active')->get();
+             //$data=DB::table('Products')->where('status','Active')->get();
+            //  $catID=$data->cat_id;
+            //  $check = Cat::where([['id',$catID]])->get();
+             
         
          return view('products', ['list'=> $data ]);  
     }
@@ -50,8 +56,9 @@ class ProductController extends Controller
     {
       
       $data=DB::table('Products')->where('id',$id)->get();
+      $catdata=Cat::all();
 
-      return view('editProduct', ['list'=> $data ]);  
+      return view('editProduct', ['list'=> $data ])->with('catdata',$catdata);  
 
 
     }
@@ -63,6 +70,7 @@ class ProductController extends Controller
             'ProductName'=>'required',
             'Quantity'=>'required',
             'Price'=>'required',
+            'Category'=>'required',
 
         ]);
 
@@ -73,6 +81,7 @@ class ProductController extends Controller
             'description'=>$req->input('Description'),
             'quantity'=>$req->input('Quantity'),
             'price'=>$req->input('Price'),
+            'cat_id'=>$req->input('Category'),
 
            ]);
     
