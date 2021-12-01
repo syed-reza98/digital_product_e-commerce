@@ -25,12 +25,18 @@
                         </form>
                         <form action="#" method="GET" class="w-full max-w-sm">
                         </form>
-                        <form action="#" method="GET" class="w-full max-w-sm">
-                        </form>
                         <form action="{{ route('addProduct') }}" method="get" class="w-full max-w-sm">
                             @csrf
                             <button type="submit"  class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-3 px-5 rounded">
                             Add Product
+                            </button>
+
+
+                        </form>
+                        <form action="{{ route('addCategory') }}" method="get" class="w-full max-w-sm">
+                            @csrf
+                            <button type="submit"  class="shadow bg-green-100 hover:bg-green-100 focus:shadow-outline focus:outline-none text-xs font-bold py-3 px-5 rounded">
+                            Add Category
                             </button>
 
 
@@ -71,6 +77,9 @@
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Price
                                             </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Category
+                                            </th>
                                             <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Action
                                             </th>
@@ -109,6 +118,9 @@
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $item->price }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $item->cat_id }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 sm:flex items-center">
                                                 <form action="{{ route('editProduct',['id' => "$item->id" ]) }}"  method="GET" class="w-full max-w-sm">

@@ -13,13 +13,18 @@ class CreateProductsTable extends Migration
      */
     public function up() {
         Schema::create( 'products', function ( Blueprint $table ) {
-          $table->increments( 'id' );
+          $table->bigIncrements( 'id' );
+          $table->bigInteger('cat_id')->unsigned();
           $table->string( 'name' );
           $table->string( 'description' );
           $table->double( 'price' );
           $table->string( 'status' )->default( 'Active' );
           $table->tinyInteger( 'quantity' )->default( 0 );
           $table->timestamps();
+          $table->foreign('cat_id')
+                    ->references('id')
+                    ->on('cats')
+                    ->onCascade('delete');
         } );
 
 

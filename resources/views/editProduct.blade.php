@@ -46,6 +46,18 @@
                                 <span style="color:red">@error('Price'){{$message}}@enderror</span>
 							</div>
 
+							<div class="col-span-12 ">
+								<label for="Category" class="block text-lg font-medium text-blue-600">Category</label>
+								<select class="form-control" name="Category" id="Category">
+									<option hidden>Choose Category</option>
+									@foreach ($catdata as $cat)
+									<option value="{{ $cat->id }}">{{ $cat->name }}</option>
+									@endforeach
+								</select>
+								{{-- <input type="text" name="Description" id="Description" placeholder="Write Product Description" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"> --}}
+                                <span style="color:red">@error('Category'){{$message}}@enderror</span>
+							</div>
+
 							
 						</div>
 					</div>
