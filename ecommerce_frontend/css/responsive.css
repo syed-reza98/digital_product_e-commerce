@@ -1,0 +1,29 @@
+@media  screen and (min-device-width: 100px) and (max-device-width: 575px){
+.home-centre h1{
+    
+    font-size: 60px;
+
+}
+.home-centre p{
+    
+    font-size: 10px;
+
+
+
+}
+
+.home-btn .btn-member{
+margin-top: 15px;
+}
+
+
+
+}
+@media  screen and (min-device-width: 576px) and (max-device-width: 767px){
+.home-centre h1{
+    
+    font-size: 60px;
+
+}
+
+}
