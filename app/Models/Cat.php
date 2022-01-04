@@ -9,9 +9,15 @@ class Cat extends Model
 {
     use HasFactory;
     public $timestamps=false;
-    protected $table = 'cats';
-    protected $primaryKey = 'id';
-    public function produts(){
-        return $this->hasMany(Product::class);
+
+    protected $fillable = [
+        'name',
+    ];
+    
+    public function products(){
+        return $this->hasMany(Product::class );
     }
+    // public function produts(){
+    //     return $this->hasMany(Product::class);
+    // }
 }
