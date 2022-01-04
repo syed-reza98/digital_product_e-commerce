@@ -120,7 +120,7 @@
                                             {{ $item->price }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $item->cat_id }}
+                                            {{ $item->cats->name }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 sm:flex items-center">
                                                 <form action="{{ route('editProduct',['id' => "$item->id" ]) }}"  method="GET" class="w-full max-w-sm">
