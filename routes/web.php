@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PlaceOrderController;
 use App\Models\Cat;
 
 /*
@@ -21,6 +23,11 @@ use App\Models\Cat;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//---------------------------Fornt Order Page-------------------------------------------
+Route::get('/addOrder',[PlaceOrderController::class, 'index'])->name('addOrder');
+Route::post('/addingorder',[PlaceOrderController::class,'store'])->name('addOrderPostRequest');
+// ----------------------------------------------------------------------------------------------
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -65,9 +72,16 @@ Route::middleware(['auth:sanctum', 'verified'])
 //---------------------------------------------------------------------------------
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/orders', function () {
-    return view('orders');
-})->name('orders');
+//---------------------------fetching products from db-------------------------------------------
+Route::middleware(['auth:sanctum', 'verified'])
+->get('/orders',[OrderController::class,'fetchOrderfromdb'])->name('orders');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/orders', function () {
+//     return view('orders');
+// })->name('orders');
+// ----------------------------------------------------------------------------------------------
+
+
 
 Route::get('/about', function () {
     return view('about');
