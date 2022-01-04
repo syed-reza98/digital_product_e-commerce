@@ -69,7 +69,6 @@ In terminal run
   <img src="https://contrib.rocks/image?repo=syed-reza98/digital_product_e-commerce" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
 
 ## License
 
