@@ -15,10 +15,23 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        @livewireStyles
     </head>
-    <body>
+    <body class="font-sans antialiased">
+        <x-jet-banner />
+
+        <div class="min-h-screen bg-gray-100">
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+        @stack('modals')
+        @livewireScripts
+    </body>
+    {{-- <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
-    </body>
+    </body> --}}
 </html>
